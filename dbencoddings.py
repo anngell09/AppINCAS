@@ -18,14 +18,15 @@ cursor = conn.cursor()
 # Crear la tabla si no existe
 create_table_query = """
 CREATE TABLE IF NOT EXISTS tabla_descriptores (
-    nombre_usuario VARCHAR(255) PRIMARY KEY,
-    descriptor_data LONGBLOB
+    descriptor_data LONGBLOB,
+    nombre_usuario VARCHAR(255),
+    PRIMARY KEY(descriptor_data(767))  # Especifica una longitud de clave de 767 bytes
 )
 """
 cursor.execute(create_table_query)
 
 # Nombre del usuario
-nombre_usuario = "Cherry"
+nombre_usuario = "Lobo"
 
 # Comprobar si ya existe un descriptor para este usuario
 select_query = "SELECT descriptor_data FROM tabla_descriptores WHERE nombre_usuario = %s"
@@ -36,7 +37,7 @@ if existing_descriptor is not None:
     print(f"Ya existe un descriptor facial para el usuario {nombre_usuario}.")
 else:
     # Cargar la imagen
-    imagen = cv2.imread('img/IMG-20230827-WA0001.jpg')  # Reemplaza con la ubicación de tu imagen
+    imagen = cv2.imread('img/IMG-20230827-WA0013.jpg')  # Reemplaza con la ubicación de tu imagen
     cara = mtcnn.detect_faces(imagen)
 
     # Asegúrate de que se haya detectado al menos una cara
@@ -65,8 +66,8 @@ else:
         descriptor_bytes = embedding_array.tobytes()
         
         # Almacenar el descriptor facial en la base de datos junto con el nombre de usuario
-        insert_query = "INSERT INTO tabla_descriptores (nombre_usuario, descriptor_data) VALUES (%s, %s)"
-        cursor.execute(insert_query, (nombre_usuario, descriptor_bytes))
+        insert_query = "INSERT INTO tabla_descriptores (descriptor_data, nombre_usuario) VALUES (%s, %s)"
+        cursor.execute(insert_query, (descriptor_bytes, nombre_usuario))
         conn.commit()  # Guardar los cambios en la base de datos
         
         # Ahora tienes el descriptor facial almacenado en la base de datos
