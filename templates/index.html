@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+</head>
+<body>
+    <h1>Upload Image</h1>
+    
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Seleccionar archivo:</label>
+        <input type="file" name="file" accept="image/*" required><br>
+        
+        <label for="nie">NIE:</label>
+        <input type="text" name="nie" required><br>
+
+        <label for="nombres">Nombres:</label>
+        <input type="text" name="nombres" required><br>
+
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" name="apellidos" required><br>
+
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
