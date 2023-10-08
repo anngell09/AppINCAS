@@ -4,7 +4,7 @@ import numpy as np
 from mtcnn.mtcnn import MTCNN
 import torch
 import pymysql
-
+ 
 #jklfsajlkfjalñkjflñajflñksa
 
 # Cargar el modelo InceptionResnetV1
