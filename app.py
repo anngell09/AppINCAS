@@ -28,6 +28,7 @@ cursor.execute(create_table_query)
 # Nombre del usuario
 nombre_usuario = "Angel"
 
+
 # Comprobar si ya existe un descriptor para este usuario
 select_query = "SELECT descriptor_data FROM tabla_descriptores WHERE nombre_usuario = %s"
 cursor.execute(select_query, (nombre_usuario,))

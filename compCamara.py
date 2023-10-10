@@ -41,7 +41,9 @@ while True:
     ret, frame = cap.read()
 
     # Detección de caras con MTCNN en el fotograma capturado
+    
     caras = mtcnn.detect_faces(frame)
+
 
     if len(caras) > 0:
         # Extraer la región de la cara en el fotograma
