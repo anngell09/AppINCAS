@@ -43,6 +43,9 @@ while True:
     # Detección de caras con MTCNN en el fotograma capturado
     
     caras = mtcnn.detect_faces(frame)
+    
+    
+    
 
 
     if len(caras) > 0:
