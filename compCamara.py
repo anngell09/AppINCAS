@@ -4,7 +4,7 @@ import numpy as np
 from mtcnn.mtcnn import MTCNN
 import torch
 import pymysql
- 
+
 #jklfsajlkfjalñkjflñajflñksa
 
 # Cargar el modelo InceptionResnetV1
@@ -43,10 +43,6 @@ while True:
     # Detección de caras con MTCNN en el fotograma capturado
     
     caras = mtcnn.detect_faces(frame)
-    
-    
-    
-
 
     if len(caras) > 0:
         # Extraer la región de la cara en el fotograma
@@ -108,4 +104,4 @@ cap.release()
 cv2.destroyAllWindows()
 
 # Cerrar la conexión a la base de datos
-conn.close()
+conn.close()      
