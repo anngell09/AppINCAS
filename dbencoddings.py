@@ -9,7 +9,7 @@ import pymysql
 encoder = InceptionResnetV1(pretrained='vggface2', classify=False).eval()
 
 # Crear una instancia de MTCNN
-mtcnn = MTCNN() 
+mtcnn = MTCNN()
 
 # Conectar a la base de datos MySQL
 conn = pymysql.connect(host='localhost', user='root', password='', database='app_recognition')
@@ -39,7 +39,8 @@ else:
     # Cargar la imagen
     imagen = cv2.imread('img/Face_2.jpeg')  # Reemplaza con la ubicación de tu imagen
     cara = mtcnn.detect_faces(imagen)
-   # Asegúrate de que se haya detectado al menos una cara
+
+    # Asegúrate de que se haya detectado al menos una cara
     if len(cara) > 0:
         # Extraer la región de la cara
         x, y, width, height = cara[0]['box']
@@ -48,13 +49,13 @@ else:
         # Redimensionar la cara a 160x160
         face = cv2.resize(face, (160, 160))
         
-         # Preprocesar la imagen para el modelo InceptionResnetV1
+        # Preprocesar la imagen para el modelo InceptionResnetV1
         face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
         face = np.transpose(face, (2, 0, 1))
         face = face / 255.0
         face_tensor = torch.tensor(face, dtype=torch.float32)
         face_tensor = face_tensor.unsqueeze(0)
-        
+
         # Generar el embedding de la cara
         embedding_cara = encoder(face_tensor)
         
@@ -73,7 +74,6 @@ else:
         print(f"Descriptor facial almacenado en la base de datos para el usuario {nombre_usuario}.")
     else:
         print("No se detectaron caras en la imagen.")
-        
-        
-        # Cerrar la conexión a la base de datos
+
+# Cerrar la conexión a la base de datos
 conn.close()
