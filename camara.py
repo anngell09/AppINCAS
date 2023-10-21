@@ -102,3 +102,4 @@ cv2.destroyAllWindows()
 
 # Cerrar la conexión a la base de datos
 conn.close()
+
